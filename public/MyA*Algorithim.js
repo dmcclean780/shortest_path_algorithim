@@ -1,19 +1,21 @@
 let world;
 let terrainCost
-let end = {x:15, y:4};
+let end = {x:Math.floor(Math.random()*39), y:Math.floor(Math.random()*29)};
 let start = {x:22, y:16};
+let terrainCosts=[1,1,1,1,1,1,Infinity,Infinity,Infinity,Infinity,Infinity, Infinity, Infinity, Infinity ]
 
 
 window.addEventListener('load',(event)=>{
     const canvas=document.getElementById("canvas")
     start=popWorld(start, end);
+    //console.log(terrainCost);
     let path=AStar(world, start, end)
     plotTerrain(terrainCost)
     plotPath(path, "rgb(0,0,255")
 })
 
 
-function popWorld(start, end){
+function popWorld(start){
     world=new Array(40);
     terrainCost=new Array(40);
     for(var i=0; i<world.length; i++){
@@ -21,7 +23,8 @@ function popWorld(start, end){
         terrainCost[i]=new Array(30)
         for(var j=0; j<world[i].length; j++){
             world[i][j]={x:i, y:j, f:0, g:0, h:0, neighbours:null, parent:null};
-            terrainCost[i][j]=1;
+            terrainCost[i][j]=terrainCosts[Math.floor(Math.random()*terrainCosts.length)];
+            //console.log(Math.floor(Math.random()*terrainCosts.length))
         }
     }
     start=world[start.x][start.y]
@@ -55,11 +58,11 @@ function draw(x, y, colour) {
 function plotTerrain(terrainCost){
     for(var i=0; i<terrainCost.length; i++){
         for(var j=0; j<terrainCost[i].length; j++){
-            if(terrainCost[i][j]==100){
-                draw(j, i, "rgb(0, 0, 0)")
+            if(terrainCost[i][j]==Infinity){
+                draw(i, j, "rgb(0, 0, 0)")
             }
             if(terrainCost[i][j]==10){
-                draw(j, i, "rgb(255, 255, 0)")
+                draw(i, j, "rgb(255, 255, 0)")
             }
         }
     }
