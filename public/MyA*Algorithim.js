@@ -2,7 +2,7 @@ let world;
 let terrainCost
 let end = {x:Math.floor(Math.random()*39), y:Math.floor(Math.random()*29)};
 let start = {x:22, y:16};
-let terrainCosts=[1,1,1,1,1,1,Infinity,Infinity,Infinity,Infinity,Infinity, Infinity, Infinity, Infinity ]
+let terrainCosts=[1,1,1,1,1,1,1,Infinity,Infinity,Infinity,Infinity,Infinity ]
 
 
 window.addEventListener('load',(event)=>{
